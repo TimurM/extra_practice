@@ -10,7 +10,7 @@ var convertMapArr = function(keyValPair) {
     var keyExistsInMap = (key in queryMap);
     queryMap[key] = (keyExistsInMap ? //checks to see if key already exists
       queryMap[key].concat([[remainingChildren, value]]) : //adds the remaining keyValArr
-      //to the lists which is stored as the value at that key 
+      //to the lists which is stored as the value at that key
       [[remainingChildren, value]]);
     return keyExistsInMap ? keysArray : keysArray.concat([key]);
 
