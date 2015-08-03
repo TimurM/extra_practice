@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <title></title>
+  </head>
+  <body>
+    <div id="fromRenderedEventRecords" style="position: relative; height: 720px; width: 600px; background-color: red">
+
+    </div>
+    <script src="app.js"></script>
+    <script>
+      var layOutDay = function(events) {
+        var parentDiv = document.querySelector('#fromRenderedEventRecords');
+        // var cssPosition = 'position: absolute; top: 0px; left: 0px; height: 100px; width: 200px; background-color: yellow; z-index: 100';
+        var renderCSSPosition = function(record) {
+          var result =[
+            'position: absolute',
+            "outline:" + "1px solid black",
+            "top:" + record.top +"px",
+            "left:" + record.left +"px",
+            "height:" + record.height +"px",
+            "width:" + record.width + "px",
+          ];
+
+          return result.join(";");
+        };
+        var renderEvent = function(record) {
+          return '<div style="' + renderCSSPosition(record) + '"></div>'
+        };
+        // var eventList = [
+        //   {top:0, left: 0, height: 100, width: 200},
+        //   {top: 100, left: 0, height: 100, width: 100},
+        //   {top: 100, left: 100, height: 200, width: 100},
+        //   {top: 200, left: 0, height: 100, width: 100}
+        // ];
+
+        var eventList = flattenEvents(addWidthAndLeftMarginToEvents(eventsPlaceColumns(eventGroups(events))));
+        console.log(eventList)
+        eventList.forEach(function(eventRecord) {
+          parentDiv.insertAdjacentHTML('beforeEnd', renderEvent(eventRecord));
+        })
+      }
+      // layOutDay([
+      //   {start: 560, end: 620},
+      //    {start: 160, end: 170},
+      //    {start: 130, end: 165},
+      //    {start: 180, end: 340},
+      //    {start: 230, end: 400},
+      //    {start: 30, end: 150},
+      //    {start: 540, end: 600},
+      //    {start: 610, end: 670}
+      //    ])
+      // layOutDay([ {start: 30, end: 150}, {start: 540, end: 600}, {start: 560, end: 620}, {start: 610, end: 670} ])
+    </script>
+  </body>
+</html>
